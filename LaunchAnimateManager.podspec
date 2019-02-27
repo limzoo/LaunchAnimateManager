@@ -25,7 +25,7 @@ Pod::Spec.new do |s|
   #   * Write the description between the DESC delimiters below.
   #   * Finally, don't worry about the indent, CocoaPods strips it!
   s.description  = <<-DESC
-LaunchAnimateManagerDDDD
+LaunchAnimateManagerDDDD20190217
                    DESC
 
   s.homepage     = "https://github.com/limzoo/LaunchAnimateManager.git"
@@ -117,7 +117,7 @@ LaunchAnimateManagerDDDD
   #  the lib prefix of their name.
   #
 
-  # s.framework  = "SomeFramework"
+ s.frameworks = "UIKit"
   # s.frameworks = "SomeFramework", "AnotherFramework"
 
   # s.library   = "iconv"
@@ -133,6 +133,8 @@ LaunchAnimateManagerDDDD
   # s.requires_arc = true
 
   # s.xcconfig = { "HEADER_SEARCH_PATHS" => "$(SDKROOT)/usr/include/libxml2" }
-   s.dependency "AFNetworking","MBProgressHUD"
-
+   s.dependency "AFNetworking"
+   s.dependency "MBProgressHUD"
+   s.dependency "AVOSCloud"
+s.dependency "SDWebImage"
 end

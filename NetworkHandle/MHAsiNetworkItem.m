@@ -9,6 +9,8 @@
 #import "MHAsiNetworkItem.h"
 #import "AFNetworking.h"
 #import "MHAsiNetworkDefine.h"
+#import <MBProgressHUD/MBProgressHUD.h>
+
 @interface MHAsiNetworkItem ()
 
 @end

@@ -9,7 +9,8 @@
 #import "MHNetworkManager.h"
 #import "MHAsiNetworkHandler.h"
 #import "MHUploadParam.h"
-#import <MBProgressHUD.h>
+#import "MBProgressHUD.h"
+
 @implementation MHNetworkManager
 + (instancetype)allocWithZone:(struct _NSZone *)zone
 {
