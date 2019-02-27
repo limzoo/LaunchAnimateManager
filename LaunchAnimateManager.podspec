@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "LaunchAnimateManager"
-  s.version      = "0.0.1"
+  s.version      = "0.0.2"
   s.summary      = "LaunchAnimateManagerSSSSS"
 
   # This description is used to generate tags and improve search results.
@@ -136,5 +136,5 @@ LaunchAnimateManagerDDDD20190217
    s.dependency "AFNetworking"
    s.dependency "MBProgressHUD"
    s.dependency "AVOSCloud"
-s.dependency "SDWebImage"
+   s.dependency "SDWebImage"
 end
