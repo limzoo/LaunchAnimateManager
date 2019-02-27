@@ -11,7 +11,7 @@
 #import "TJLaunchAnimateViewController.h"
 #import <AVOSCloud/AVOSCloud.h>
 #import "TNGWebViewController.h"
-#import <UIImageView+WebCache.h>
+#import "UIImageView+WebCache.h"
 
 @interface LaunchAnimateManager()
 @property (nonatomic, strong) NSString *name;
