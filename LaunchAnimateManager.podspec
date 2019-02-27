@@ -117,7 +117,7 @@ LaunchAnimateManagerDDDD20190217
   #  the lib prefix of their name.
   #
 
- s.frameworks = "UIKit"
+ s.frameworks = "UIKit","Foundation"
   # s.frameworks = "SomeFramework", "AnotherFramework"
 
   # s.library   = "iconv"
