@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "LaunchAnimateManager"
-  s.version      = "v0.0.1"
+  s.version      = "0.0.1"
   s.summary      = "启动页请求方式"
 
   # This description is used to generate tags and improve search results.
