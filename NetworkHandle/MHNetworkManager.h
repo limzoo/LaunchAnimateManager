@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "MHAsiNetworkDefine.h"
 #import "MHAsiNetworkDelegate.h"
-#import <AFNetworking.h>
+#import "AFNetworking.h"
 #import <AFHTTPSessionManager.h>
 @class MHUploadParam;
 /// 请求管理着
