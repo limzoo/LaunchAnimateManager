@@ -137,4 +137,5 @@ LaunchAnimateManagerDDDD20190217
    s.dependency "MBProgressHUD"
    s.dependency "AVOSCloud"
    s.dependency "SDWebImage"
+   s.dependency "EasyNavigation"
 end

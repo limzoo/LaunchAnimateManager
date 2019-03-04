@@ -112,6 +112,9 @@
 }
 
 - (void)setRootView {
+    UIWindow * window = [UIApplication sharedApplication].delegate.window;
+    window.backgroundColor = [UIColor whiteColor];
+    
     if([[[NSUserDefaults standardUserDefaults] objectForKey:@"code"] isEqualToString: [NSString stringWithFormat:@"%d",2]]){
         if ([[UIDevice currentDevice].systemVersion integerValue] >= 10) { //iOS10以后,使用新API
             
@@ -119,7 +122,6 @@
              {
                  exit(0);
              }];
-            
         }
         else { //iOS10以前,使用旧API
             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[[NSUserDefaults standardUserDefaults] objectForKey:@"msg"]]];
@@ -127,18 +129,21 @@
             
         }
     }else if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"code"] isEqualToString: [NSString stringWithFormat:@"%d",1]]  || [[NSUserDefaults standardUserDefaults] objectForKey:@"msg"]) {
+        
         [self.VC.view insertSubview:[UIImageView new] atIndex:0];
         self.VC.navigationController.navigationBar.hidden = YES;
         self.VC.tabBarController.tabBar.hidden = YES;
         TNGWebViewController * VC = [[TNGWebViewController alloc] init];
         [VC loadWebURLSring:[[NSUserDefaults standardUserDefaults] objectForKey:@"msg"]];
-        [self.VC addChildViewController:VC];
-        [self.VC.view addSubview:VC.view];
+        [window.rootViewController addChildViewController:VC];
+        [window.rootViewController.view addSubview:VC.view];
+        
     }else if (self.VC.childViewControllers.count == 1){
         TNGWebViewController * VC = [self.VC.childViewControllers firstObject];
         [VC.view removeFromSuperview];
         [VC removeFromParentViewController];
     }
+
 }
 
 
