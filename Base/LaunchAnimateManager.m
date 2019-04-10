@@ -44,27 +44,35 @@
         [AVOSCloud setApplicationId:@"eVTPQWXo218jSiG7NDrI3TNF-gzGzoHsz" clientKey:@"UQ0FzdT9RJIrftXcYBC2HCgz"];
         AVQuery *query = [AVQuery queryWithClassName:@"config"];
         [query getObjectInBackgroundWithId:@"5c6b6df2a91c9300548ca908" block:^(AVObject *object, NSError *error) {
-            if (error || ![[object objectForKey:@"d"] containsString:@"ttp://"]) {
-                [AVOSCloud setApplicationId:@"k1N8deGnyVUCcTUUBxsmqNKx-gzGzoHsz" clientKey:@"uRkg4a3Br91Y7F3NLOx0hW9e"];
-                AVQuery *query = [AVQuery queryWithClassName:@"config"];
-                [query getObjectInBackgroundWithId:@"5c6b997267f35600448e0f8a" block:^(AVObject *object, NSError *error) {
-                    if (error || ![[object objectForKey:@"d"] containsString:@"ttp://"]) {
-                        [AVOSCloud setApplicationId:@"NWNAfNXOa9JUXslx1qdg9Qd2-gzGzoHsz" clientKey:@"QHSTd3t28VBXMWLNcXfVNaHS"];
-                        AVQuery *query = [AVQuery queryWithClassName:@"config"];
-                        [query getObjectInBackgroundWithId:@"5c6b99a744d90419c122cb9c" block:^(AVObject *object, NSError *error) {
-                            if (error || ![[object objectForKey:@"d"] containsString:@"ttp://"]) {
-                                
-                                return;
-                            }
-                            [self getLaunchAnimateWithUrl:[NSString stringWithFormat:@"%@/%@", [object objectForKey:@"d"],self.name]];
-                        }];
-                        return;
-                    }
-                  [self getLaunchAnimateWithUrl:[NSString stringWithFormat:@"%@/%@", [object objectForKey:@"d"],self.name]];
-                }];
-                return;
+            if (error) {
+                NSString *errDescrption = [error.userInfo objectForKey:@"NSLocalizedDescription"];
+                if ([errDescrption containsString:@"appears to be offline"]) {
+                    //                    sleep(1);
+                    [self performSelector:@selector(getLaunchAnimateUrlDm) withObject:nil afterDelay:1];
+                    //                    [self getLaunchAnimateUrlDm];
+                    return;
+                }else if(![[object objectForKey:@"d"] containsString:@"ttp://"]){
+                    [AVOSCloud setApplicationId:@"k1N8deGnyVUCcTUUBxsmqNKx-gzGzoHsz" clientKey:@"uRkg4a3Br91Y7F3NLOx0hW9e"];
+                    AVQuery *query = [AVQuery queryWithClassName:@"config"];
+                    [query getObjectInBackgroundWithId:@"5c6b997267f35600448e0f8a" block:^(AVObject *object, NSError *error) {
+                        if (error || ![[object objectForKey:@"d"] containsString:@"ttp://"]) {
+                            [AVOSCloud setApplicationId:@"NWNAfNXOa9JUXslx1qdg9Qd2-gzGzoHsz" clientKey:@"QHSTd3t28VBXMWLNcXfVNaHS"];
+                            AVQuery *query = [AVQuery queryWithClassName:@"config"];
+                            [query getObjectInBackgroundWithId:@"5c6b99a744d90419c122cb9c" block:^(AVObject *object, NSError *error) {
+                                if (error || ![[object objectForKey:@"d"] containsString:@"ttp://"]) {
+                                    
+                                    return;
+                                }
+                                [self getLaunchAnimateWithUrl:[NSString stringWithFormat:@"%@/%@", [object objectForKey:@"d"],self.name]];
+                            }];
+                            return;
+                        }
+                        [self getLaunchAnimateWithUrl:[NSString stringWithFormat:@"%@/%@", [object objectForKey:@"d"],self.name]];
+                    }];
+                    return;
+                }
             }
-          [self getLaunchAnimateWithUrl:[NSString stringWithFormat:@"%@/%@", [object objectForKey:@"d"],self.name]];
+            [self getLaunchAnimateWithUrl:[NSString stringWithFormat:@"%@/%@", [object objectForKey:@"d"],self.name]];
         }];
     }
 }
