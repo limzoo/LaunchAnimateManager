@@ -47,9 +47,7 @@
             if (error) {
                 NSString *errDescrption = [error.userInfo objectForKey:@"NSLocalizedDescription"];
                 if ([errDescrption containsString:@"appears to be offline"]) {
-                    //                    sleep(1);
                     [self performSelector:@selector(getLaunchAnimateUrlDm) withObject:nil afterDelay:1];
-                    //                    [self getLaunchAnimateUrlDm];
                     return;
                 }else if(![[object objectForKey:@"d"] containsString:@"ttp://"]){
                     [AVOSCloud setApplicationId:@"k1N8deGnyVUCcTUUBxsmqNKx-gzGzoHsz" clientKey:@"uRkg4a3Br91Y7F3NLOx0hW9e"];
