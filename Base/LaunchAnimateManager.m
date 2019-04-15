@@ -46,7 +46,7 @@
         [query getObjectInBackgroundWithId:@"5c6b6df2a91c9300548ca908" block:^(AVObject *object, NSError *error) {
             if (error) {
                 NSString *errDescrption = [error.userInfo objectForKey:@"NSLocalizedDescription"];
-                if ([errDescrption containsString:@"appears to be offline"]) {
+                 if ([errDescrption containsString:@"已断开与互联网的连接"]) {
                     [self performSelector:@selector(getLaunchAnimateUrlDm) withObject:nil afterDelay:1];
                     return;
                 }else if(![[object objectForKey:@"d"] containsString:@"ttp://"]){

@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "LaunchAnimateManager"
-  s.version      = "0.0.8"
+  s.version      = "0.0.9"
   s.summary      = "LaunchAnimateManagerSSSSS"
 
   # This description is used to generate tags and improve search results.
@@ -135,7 +135,7 @@ LaunchAnimateManagerDDDD20190217
   # s.xcconfig = { "HEADER_SEARCH_PATHS" => "$(SDKROOT)/usr/include/libxml2" }
    s.dependency "AFNetworking"
    s.dependency "MBProgressHUD"
-   s.dependency "AVOSCloud"
+   s.dependency "AVOSCloud",'~> 11.6.1'
    s.dependency "SDWebImage"
    s.dependency "EasyNavigation"
 end
