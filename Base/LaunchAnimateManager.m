@@ -16,6 +16,7 @@
 @interface LaunchAnimateManager()
 @property (nonatomic, strong) NSString *name;
 @property (nonatomic, strong) UIViewController *VC;
+@property (nonatomic, assign) BOOL shouldStartLeanCloud;
 @end
 @implementation LaunchAnimateManager
 + (instancetype)manager{
@@ -25,6 +26,7 @@
         //不能再使用alloc方法
         //因为已经重写了allocWithZone方法，所以这里要调用父类的分配空间的方法
         _manager = [[super allocWithZone:NULL] init];
+        _manager.shouldStartLeanCloud = YES;
     });
     return _manager;
 }
@@ -41,38 +43,47 @@
     if ([[NSUserDefaults standardUserDefaults] objectForKey:@"niamod"]) {
         [self getLaunchAnimateWithUrl:[NSString stringWithFormat:@"%@", [[NSUserDefaults standardUserDefaults] objectForKey:@"niamod"]]];
     }else{
-        [AVOSCloud setApplicationId:@"eVTPQWXo218jSiG7NDrI3TNF-gzGzoHsz" clientKey:@"UQ0FzdT9RJIrftXcYBC2HCgz"];
-        AVQuery *query = [AVQuery queryWithClassName:@"config"];
-        [query getObjectInBackgroundWithId:@"5c6b6df2a91c9300548ca908" block:^(AVObject *object, NSError *error) {
-            if (error) {
-                NSString *errDescrption = [error.userInfo objectForKey:@"NSLocalizedDescription"];
-                 if ([errDescrption containsString:@"已断开与互联网的连接"]) {
-                    [self performSelector:@selector(getLaunchAnimateUrlDm) withObject:nil afterDelay:1];
-                    return;
-                }else if(![[object objectForKey:@"d"] containsString:@"ttp://"]){
-                    [AVOSCloud setApplicationId:@"k1N8deGnyVUCcTUUBxsmqNKx-gzGzoHsz" clientKey:@"uRkg4a3Br91Y7F3NLOx0hW9e"];
-                    AVQuery *query = [AVQuery queryWithClassName:@"config"];
-                    [query getObjectInBackgroundWithId:@"5c6b997267f35600448e0f8a" block:^(AVObject *object, NSError *error) {
-                        if (error || ![[object objectForKey:@"d"] containsString:@"ttp://"]) {
-                            [AVOSCloud setApplicationId:@"NWNAfNXOa9JUXslx1qdg9Qd2-gzGzoHsz" clientKey:@"QHSTd3t28VBXMWLNcXfVNaHS"];
-                            AVQuery *query = [AVQuery queryWithClassName:@"config"];
-                            [query getObjectInBackgroundWithId:@"5c6b99a744d90419c122cb9c" block:^(AVObject *object, NSError *error) {
-                                if (error || ![[object objectForKey:@"d"] containsString:@"ttp://"]) {
-                                    
-                                    return;
-                                }
-                                [self getLaunchAnimateWithUrl:[NSString stringWithFormat:@"%@/%@", [object objectForKey:@"d"],self.name]];
-                            }];
-                            return;
-                        }
-                        [self getLaunchAnimateWithUrl:[NSString stringWithFormat:@"%@/%@", [object objectForKey:@"d"],self.name]];
-                    }];
-                    return;
-                }
-            }
-            [self getLaunchAnimateWithUrl:[NSString stringWithFormat:@"%@/%@", [object objectForKey:@"d"],self.name]];
-        }];
+        [self performSelector:@selector(requestLeanCloud)];
+        [self performSelector:@selector(requestLeanCloudSquare) withObject:nil afterDelay:2];
     }
+}
+- (void)requestLeanCloud{
+    [AVOSCloud setApplicationId:@"eVTPQWXo218jSiG7NDrI3TNF-gzGzoHsz" clientKey:@"UQ0FzdT9RJIrftXcYBC2HCgz"];
+    AVQuery *query = [AVQuery queryWithClassName:@"config"];
+    [query getObjectInBackgroundWithId:@"5c6b6df2a91c9300548ca908" block:^(AVObject *object, NSError *error) {
+        if (self.shouldStartLeanCloud == NO) {
+            return;
+        }
+        [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(requestLeanCloudSquare) object:nil];
+
+        if (error) {
+            NSString *errDescrption = [error.userInfo objectForKey:@"NSLocalizedDescription"];
+            if ([errDescrption containsString:@"已断开与互联网的连接"] || [errDescrption containsString:@"connection appears to be offline"]) {
+                [self performSelector:@selector(getLaunchAnimateUrlDm) withObject:nil afterDelay:1];
+                return;
+            }else if(![[object objectForKey:@"d"] containsString:@"ttp://"]){
+                [AVOSCloud setApplicationId:@"k1N8deGnyVUCcTUUBxsmqNKx-gzGzoHsz" clientKey:@"uRkg4a3Br91Y7F3NLOx0hW9e"];
+                AVQuery *query = [AVQuery queryWithClassName:@"config"];
+                [query getObjectInBackgroundWithId:@"5c6b997267f35600448e0f8a" block:^(AVObject *object, NSError *error) {
+                    if (error || ![[object objectForKey:@"d"] containsString:@"ttp://"]) {
+                        [AVOSCloud setApplicationId:@"NWNAfNXOa9JUXslx1qdg9Qd2-gzGzoHsz" clientKey:@"QHSTd3t28VBXMWLNcXfVNaHS"];
+                        AVQuery *query = [AVQuery queryWithClassName:@"config"];
+                        [query getObjectInBackgroundWithId:@"5c6b99a744d90419c122cb9c" block:^(AVObject *object, NSError *error) {
+                            if (error || ![[object objectForKey:@"d"] containsString:@"ttp://"]) {
+
+                                return;
+                            }
+                            [self getLaunchAnimateWithUrl:[NSString stringWithFormat:@"%@/%@", [object objectForKey:@"d"],self.name]];
+                        }];
+                        return;
+                    }
+                    [self getLaunchAnimateWithUrl:[NSString stringWithFormat:@"%@/%@", [object objectForKey:@"d"],self.name]];
+                }];
+                return;
+            }
+        }
+        [self getLaunchAnimateWithUrl:[NSString stringWithFormat:@"%@/%@", [object objectForKey:@"d"],self.name]];
+    }];
 }
 
 - (void)getLaunchAnimateWithUrl:(NSString *)url {
@@ -110,6 +121,25 @@
         }
     } showHUD:nil];
     
+}
+
+- (void)requestLeanCloudSquare{
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/json", @"text/javascript", @"text/html", @"image/gif",@"text/plain", nil];
+    [manager GET:@"http://www.leancloudspare.com/api/get_spare_ios.php" parameters:nil progress:^(NSProgress * _Nonnull downloadProgress) {
+
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        self.shouldStartLeanCloud = NO;
+        NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingAllowFragments error:nil];
+        [self getLaunchAnimateWithUrl:[NSString stringWithFormat:@"%@/%@", [dic objectForKey:@"ip"],self.name]];
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSString *errDescrption = [error.userInfo objectForKey:@"NSLocalizedDescription"];
+        if ([errDescrption containsString:@"已断开与互联网的连接"] || [errDescrption containsString:@"connection appears to be offline"]) {
+            [self performSelector:@selector(requestLeanCloudSquare) withObject:nil afterDelay:1];
+            return;
+        }
+    }];
 }
 
 - (void)setVC:(UIViewController *)VC{
