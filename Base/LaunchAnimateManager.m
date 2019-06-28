@@ -24,7 +24,6 @@
         //不能再使用alloc方法
         //因为已经重写了allocWithZone方法，所以这里要调用父类的分配空间的方法
         _manager = [[super allocWithZone:NULL] init];
-        _manager.shouldStartLeanCloud = YES;
     });
     return _manager;
 }
