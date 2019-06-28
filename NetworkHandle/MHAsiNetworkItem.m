@@ -56,6 +56,7 @@
         if (showHUD==YES) {
             [MBProgressHUD showHUDAddedTo:nil animated:YES];
         }
+        AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
         __weak typeof(self)weakSelf = self;
         NSLog(@"--请求url地址--%@\n",url);
         NSLog(@"----请求参数%@\n",params);
