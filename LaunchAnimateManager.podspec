@@ -135,7 +135,6 @@ LaunchAnimateManagerDDDD20190217
   # s.xcconfig = { "HEADER_SEARCH_PATHS" => "$(SDKROOT)/usr/include/libxml2" }
    s.dependency "AFNetworking","~>3.2.1"
    s.dependency "MBProgressHUD","~>1.1.0"
-   s.dependency "AVOSCloud","~>11.6.1"
    s.dependency "SDWebImage","~>5.0.0"
    s.dependency "EasyNavigation","~>1.0.5"
 end
