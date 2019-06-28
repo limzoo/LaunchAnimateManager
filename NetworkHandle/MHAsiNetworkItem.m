@@ -56,15 +56,14 @@
         if (showHUD==YES) {
             [MBProgressHUD showHUDAddedTo:nil animated:YES];
         }
-        AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
         __weak typeof(self)weakSelf = self;
         NSLog(@"--请求url地址--%@\n",url);
         NSLog(@"----请求参数%@\n",params);
+        AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+        //        manager.responseSerializer.acceptableContentTypes =  [NSSet setWithObject:@"text/html"];
         manager.requestSerializer = [AFHTTPRequestSerializer serializer];
         manager.responseSerializer = [AFHTTPResponseSerializer serializer];
-        //        manager.responseSerializer.acceptableContentTypes =  [NSSet setWithObject:@"text/html"];
         manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json",@"text/json", nil];
-        manager.responseSerializer = [AFJSONResponseSerializer serializer];
         //        AFJSONResponseSerializer *jsonSer =(AFJSONResponseSerializer*) manager.responseSerializer;
         //        jsonSer.removesKeysWithNullValues = YES;
         //        [manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Accept"];
