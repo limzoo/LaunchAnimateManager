@@ -62,7 +62,6 @@
         NSLog(@"----请求参数%@\n",params);
         manager.requestSerializer = [AFHTTPRequestSerializer serializer];
         manager.responseSerializer = [AFHTTPResponseSerializer serializer];
-        AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
         //        manager.responseSerializer.acceptableContentTypes =  [NSSet setWithObject:@"text/html"];
         manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json",@"text/json", nil];
         manager.responseSerializer = [AFJSONResponseSerializer serializer];
