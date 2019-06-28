@@ -18,7 +18,7 @@ typedef NS_ENUM(NSInteger, DSLaunchAnimateType){
     DSLaunchAnimateTypePointZoomOut2
 };
 
-typedef void(^CompleteBlock)();
+typedef void(^CompleteBlock)(void);
 
 @interface TJLaunchAnimateViewController : UIViewController
 
