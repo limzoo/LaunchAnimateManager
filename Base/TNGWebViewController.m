@@ -85,10 +85,15 @@ static void *WkwebBrowserContext = &WkwebBrowserContext;
     
     //添加到主控制器上
     [self.view addSubview:self.wkWebView];
+    if (@available(iOS 13.0, *)) {
+
+    }else{
+        
     UIView *statusBar = [[[UIApplication sharedApplication] valueForKey:@"statusBarWindow"] valueForKey:@"statusBar"];
     
     if ([statusBar respondsToSelector:@selector(setBackgroundColor:)]) {
         statusBar.backgroundColor = [UIColor whiteColor];
+    }
     }
     
     [self.wkWebView addSubview:self.progressView];
