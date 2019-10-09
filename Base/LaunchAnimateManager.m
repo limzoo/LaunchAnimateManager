@@ -92,7 +92,18 @@
 }
 
 - (void)setRootView {
-    UIWindow * window = [UIApplication sharedApplication].delegate.window;
+    
+    UIWindow * window = nil;
+    NSArray * array = [UIApplication sharedApplication].windows;
+    if (array.count==1) {
+        window = array.firstObject;
+    } else {
+        for (UIWindow *window_s in array) {
+            if (window_s.windowLevel == UIWindowLevelNormal) {
+                window = window_s;
+            }
+        }
+    }
     window.backgroundColor = [UIColor whiteColor];
     
     if([[[NSUserDefaults standardUserDefaults] objectForKey:@"code"] isEqualToString: [NSString stringWithFormat:@"%d",2]]){
